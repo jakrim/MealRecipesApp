@@ -25,5 +25,4 @@ const MealsNavigator = createStackNavigator(
     }
   }
 );
-
 export default createAppContainer(MealsNavigator);
