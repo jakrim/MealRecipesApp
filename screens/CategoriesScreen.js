@@ -35,6 +35,7 @@ const CategoriesScreen = props => {
     />
   );
 };
+
 CategoriesScreen.navigationOptions = {
   headerTitle: 'Meal Categories'
 };
