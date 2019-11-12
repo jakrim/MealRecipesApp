@@ -1,29 +1,22 @@
 import React from 'react';
-import { Text, View, Button, Platform, StyleSheet } from 'react-native';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
 
-import { CATEGORIES } from '../data/dummy-data';
-import Colors from '../constants/Colors';
+import { CATEGORIES, MEALS } from '../data/dummy-data';
 
 const CategoryMealsScreen = props => {
   const categoryId = props.navigation.getParam('categoryId');
 
-  const selectedCategory = CATEGORIES.find(cat => cat.id === categoryId);
+  const displayedMeals = MEALS.filter(
+    meal => meal.categoryIds.indexOf(categoryId) >= 0
+  );
+
+  // const selectedCategory = CATEGORIES.find(cat => cat.id === categoryId);
 
   return (
     <View style={styles.screen}>
-      <Text> The Category Meals Screen </Text>
-      <Text>{selectedCategory.title}</Text>
-      <Button
-        title='Go to Details'
-        onPress={() => {
-          props.navigation.navigate('MealDetail');
-        }}
-      />
-      <Button
-        title='Go Back'
-        onPress={() => {
-          props.navigation.goBack();
-        }}
+      <FlatList
+        keyExtractor={item => item.id} // keyExtractor knows to look for ID in modern Js, not necessary
+        data={displayedMeals}
       />
     </View>
   );
