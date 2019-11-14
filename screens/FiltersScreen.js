@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, Platform, Switch, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../components/HeaderButton';
+import Colors from '../constants/Colors';
+
+const FilterSwitch = props => {
+  return (
+    <View style={styles.filterContainer}>
+      <Text>{props.label}</Text>
+      <Switch
+        trackColor={{ true: Colors.primaryColor }}
+        thumbColor={Platform.OS === 'android' ? Colors.primaryColor : ''}
+        value={props.state}
+        onValueChange={props.onChange}
+      />
+    </View>
+  );
+};
 
 const FiltersScreen = props => {
+  const [isGlutenFree, setIsFlutenFree] = useState(false);
+  const [isLactoseFree, setIsLactoseFreee] = useState(false);
+  const [isVegan, setIsVegan] = useState(false);
+  const [isVegetarian, setIsVegetarian] = useState(false);
   return (
     <View style={styles.screen}>
       <Text style={styles.title}> Available Filters / Restrictions</Text>
-      <View style={styles.filterContainer}>
-        <Text>Gluten-free</Text>
-        <Switch />
-      </View>
+      <FilterSwitch
+        label='Gluten-free'
+        state={isGlutenFree}
+        onChange={newValue => setIsFlutenFree(newValue)}
+      />
+      <FilterSwitch
+        label='Lactose-free'
+        state={isLactoseFree}
+        onChange={newValue => setIsLactoseFreee(newValue)}
+      />
+      <FilterSwitch
+        label='Vegan'
+        state={isVegan}
+        onChange={newValue => setIsVegan(newValue)}
+      />
+      <FilterSwitch
+        label='Vegetarian'
+        state={isVegetarian}
+        onChange={newValue => setIsVegetarian(newValue)}
+      />
     </View>
   );
 };
@@ -36,7 +71,7 @@ FiltersScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignContent: 'center'
+    alignItems: 'center'
   },
   title: {
     fontFamily: 'open-sans-bold',
@@ -46,8 +81,10 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
+    marginVertical: 15
   }
 });
 
