@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    padding: 15
   }
 });
 
