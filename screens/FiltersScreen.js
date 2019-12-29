@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, Platform, Switch, StyleSheet } from 'react-native';
+import { Text, View, Platform, Switch, StyleSheet, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch } from 'react-redux';
 
@@ -92,7 +92,12 @@ FiltersScreen.navigationOptions = navData => {
         <Item
           title='Save'
           iconName='ios-save'
-          onPress={navData.navigation.getParam('save')}
+          onPress={() => {
+            navData.navigation.getParam('save')();
+            Alert.alert('Filters Saved!', '', [
+              { text: 'Okay', style: 'default' }
+            ]);
+          }}
         />
       </HeaderButtons>
     )
